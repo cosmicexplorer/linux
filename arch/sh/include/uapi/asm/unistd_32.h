@@ -380,8 +380,7 @@
 #define __NR_process_vm_writev	366
 #define __NR_kcmp		367
 #define __NR_finit_module	368
-#define __NR_getstate		369
 
-#define NR_syscalls 370
+#define NR_syscalls 369
 
 #endif /* __ASM_SH_UNISTD_32_H */
