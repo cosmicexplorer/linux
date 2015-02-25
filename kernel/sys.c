@@ -827,6 +827,7 @@ change_okay:
  */
 SYSCALL_DEFINE0(getpid)
 {
+	printk("testing lol");
 	return task_tgid_vnr(current);
 }
 
