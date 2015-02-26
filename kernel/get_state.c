@@ -5,10 +5,11 @@
 
 // asmlinkage long sys_getstate(long * state_ptr);
 
-SYSCALL_DEFINE1(getstate, long __user *, state_ptr) {
-  if (NULL == state_ptr) {
-    return -EFAULT;
-  }
-  copy_to_user(state_ptr, current->state, sizeof(long));
-  return 0;
+SYSCALL_DEFINE1(getstate, long __user *, state_ptr)
+{
+	if (NULL == state_ptr) {
+		return -EFAULT;
+	}
+	copy_to_user(state_ptr, current->state, sizeof(long));
+	return 0;
 }
