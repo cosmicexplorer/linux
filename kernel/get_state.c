@@ -9,6 +9,6 @@ SYSCALL_DEFINE1(getstate, long __user *, state_ptr) {
   if (NULL == state_ptr) {
     return -EFAULT;
   }
-  *state_ptr = (long)current->state;
+  copy_to_user(state_ptr, current->state, sizeof(long));
   return 0;
 }
