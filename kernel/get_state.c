@@ -10,6 +10,6 @@ SYSCALL_DEFINE1(getstate, long __user *, state_ptr)
 	if (NULL == state_ptr) {
 		return -EFAULT;
 	}
-	return copy_to_user(state_ptr, (const void *)&current->state,
-			    sizeof(long));
+	copy_to_user(state_ptr, current->state, sizeof(long));
+	return 0;
 }
