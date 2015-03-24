@@ -87,6 +87,14 @@ Implement a system for logging the contents of the CFS red-black tree over time.
 # March 30
 
 - Have agreed on intermediate representation of scheduler tree in procfs
+- Have decided on framework for display results (GUI/terminal, which language to use)
+- Have demonstrated proof of concept for pipeline of rb tree data to procfs (not necessarily usable data, just some data)
 
+# April 15
 
-# April 28
+- Have implemented complete pipeline of rb tree data to procfs, although may not be fully robust
+- Userspace program can display some sort of burndown data for processes scheduled
+
+# April 28: Due Date
+
+- full kernel and userspace segments completed
