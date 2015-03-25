@@ -98,3 +98,21 @@ Implement a system for logging the contents of the CFS red-black tree over time.
 # April 28: Due Date
 
 - full kernel and userspace segments completed
+
+----------------------
+# Comments
+
+----------------------
+
+- @@ output to binary, have other program interpreting
+- @@ don't add syscall, not required
+- @@ just have kthread outputting constantly to some file globally available in procfs
+- @@ use another node in procfs to turn on/off logging (write 1/0 to switch on/off)
+- @@ forensic analysis: offline instead of realtime
+- @@ consider having per-process access to proc
+- @@ only attempt to add functionality in userspace if we're confident we can get that data from the kernel
+- @@ have quite clearly defined output
+- @@ rtfm
+- @@ try to keep everything that can change inside a kernel module
+- @@ keep only entry point as function pointer inside scheduler
+- can have mixture of both online/offline analysis
