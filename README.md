@@ -107,6 +107,8 @@ Implement a system for logging the contents of the CFS red-black tree over time.
 - @@ output to binary, have other program interpreting
 - @@ don't add syscall, not required
 - @@ just have kthread outputting constantly to some file globally available in procfs
+  - @@ because procfs is a virtual file system, it actually just calls a function whenever a read is instigated on a file
+  - @@ therefore no memory concerns
 - @@ use another node in procfs to turn on/off logging (write 1/0 to switch on/off)
 - @@ forensic analysis: offline instead of realtime
 - @@ consider having per-process access to proc
