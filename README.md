@@ -128,8 +128,12 @@ Implement a system for logging the contents of the CFS red-black tree over time.
   - good overhead description of cfs, with some code references
 
 ----------------------
-# Applications
+# Product
 
 ----------------------
 
--
+- online mode and offline mode
+- offline mode is set to run for a certain period of time and display the rb tree at each context switch during that period of time
+  - collect aggregate and over-time stats (a moving average of which processes are running at which heights on the rb tree, for example)
+- online mode (more limited functionality):
+  - can run queries on current state of rb tree
