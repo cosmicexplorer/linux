@@ -795,7 +795,7 @@ void udp_set_csum(bool nocheck, struct sk_buff *skb,
 }
 EXPORT_SYMBOL(udp_set_csum);
 
-static int udp_send_skb(struct sk_buff *skb, struct flowi4 *fl4)
+int udp_send_skb(struct sk_buff *skb, struct flowi4 *fl4)
 {
 	struct sock *sk = skb->sk;
 	struct inet_sock *inet = inet_sk(sk);
@@ -850,6 +850,7 @@ send:
 				   UDP_MIB_OUTDATAGRAMS, is_udplite);
 	return err;
 }
+EXPORT_SYMBOL(udp_send_skb);
 
 /*
  * Push out all pending data as one UDP datagram. Socket is locked.

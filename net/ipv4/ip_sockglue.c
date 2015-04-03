@@ -288,7 +288,7 @@ int ip_cmsg_send(struct net *net, struct msghdr *msg, struct ipcm_cookie *ipc,
 	}
 	return 0;
 }
-
+EXPORT_SYMBOL(ip_cmsg_send);
 
 /* Special input handler for packets caught by router alert option.
    They are selected only by protocol field, and then processed likely
@@ -530,7 +530,7 @@ out_free_skb:
 out:
 	return err;
 }
-
+EXPORT_SYMBOL(ip_recv_error);
 
 /*
  *	Socket option code for IP. This is the end of the line after any
