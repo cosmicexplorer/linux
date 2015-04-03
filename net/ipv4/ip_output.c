@@ -1422,6 +1422,7 @@ int ip_send_skb(struct net *net, struct sk_buff *skb)
 
 	return err;
 }
+EXPORT_SYMBOL(ip_send_skb);
 
 int ip_push_pending_frames(struct sock *sk, struct flowi4 *fl4)
 {
