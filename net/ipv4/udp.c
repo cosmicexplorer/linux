@@ -335,6 +335,7 @@ int udp_v4_get_port(struct sock *sk, unsigned short snum)
 	udp_sk(sk)->udp_portaddr_hash = hash2_partial;
 	return udp_lib_get_port(sk, snum, ipv4_rcv_saddr_equal, hash2_nulladdr);
 }
+EXPORT_SYMBOL(udp_v4_get_port);
 
 static inline int compute_score(struct sock *sk, struct net *net,
 				__be32 saddr, unsigned short hnum, __be16 sport,
@@ -694,6 +695,7 @@ void udp_err(struct sk_buff *skb, u32 info)
 {
 	__udp4_lib_err(skb, info, &udp_table);
 }
+EXPORT_SYMBOL(udp_err);
 
 /*
  * Throw away all pending data and cancel the corking. Socket is locked.
@@ -1171,7 +1173,7 @@ out:
 	release_sock(sk);
 	return ret;
 }
-
+EXPORT_SYMBOL(udp_sendpage);
 
 /**
  *	first_packet_length	- return length of first packet in receive queue
@@ -1355,7 +1357,7 @@ csum_copy_err:
 	msg->msg_flags &= ~MSG_TRUNC;
 	goto try_again;
 }
-
+EXPORT_SYMBOL(udp_recvmsg);
 
 int udp_disconnect(struct sock *sk, int flags)
 {
@@ -1442,15 +1444,16 @@ void udp_lib_rehash(struct sock *sk, u16 newhash)
 }
 EXPORT_SYMBOL(udp_lib_rehash);
 
-static void udp_v4_rehash(struct sock *sk)
+void udp_v4_rehash(struct sock *sk)
 {
 	u16 new_hash = udp4_portaddr_hash(sock_net(sk),
 					  inet_sk(sk)->inet_rcv_saddr,
 					  inet_sk(sk)->inet_num);
 	udp_lib_rehash(sk, new_hash);
 }
+EXPORT_SYMBOL(udp_v4_rehash);
 
-static int __udp_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
+int __udp_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 {
 	int rc;
 
@@ -1477,6 +1480,7 @@ static int __udp_queue_rcv_skb(struct sock *sk, struct sk_buff *skb)
 	return 0;
 
 }
+EXPORT_SYMBOL(__udp_queue_rcv_skb);
 
 static struct static_key udp_encap_needed __read_mostly;
 void udp_encap_enable(void)
@@ -1998,11 +2002,13 @@ void udp_v4_early_demux(struct sk_buff *skb)
 	if (dst)
 		skb_dst_set_noref(skb, dst);
 }
+EXPORT_SYMBOL(udp_v4_early_demux);
 
 int udp_rcv(struct sk_buff *skb)
 {
 	return __udp4_lib_rcv(skb, &udp_table, IPPROTO_UDP);
 }
+EXPORT_SYMBOL(udp_rcv);
 
 void udp_destroy_sock(struct sock *sk)
 {
@@ -2017,6 +2023,7 @@ void udp_destroy_sock(struct sock *sk)
 			encap_destroy(sk);
 	}
 }
+EXPORT_SYMBOL(udp_destroy_sock);
 
 /*
  *	Socket option code for UDP
@@ -2122,6 +2129,7 @@ int udp_setsockopt(struct sock *sk, int level, int optname,
 					  udp_push_pending_frames);
 	return ip_setsockopt(sk, level, optname, optval, optlen);
 }
+EXPORT_SYMBOL(udp_setsockopt);
 
 #ifdef CONFIG_COMPAT
 int compat_udp_setsockopt(struct sock *sk, int level, int optname,
@@ -2132,6 +2140,7 @@ int compat_udp_setsockopt(struct sock *sk, int level, int optname,
 					  udp_push_pending_frames);
 	return compat_ip_setsockopt(sk, level, optname, optval, optlen);
 }
+EXPORT_SYMBOL(compat_udp_setsockopt);
 #endif
 
 int udp_lib_getsockopt(struct sock *sk, int level, int optname,
@@ -2194,6 +2203,7 @@ int udp_getsockopt(struct sock *sk, int level, int optname,
 		return udp_lib_getsockopt(sk, level, optname, optval, optlen);
 	return ip_getsockopt(sk, level, optname, optval, optlen);
 }
+EXPORT_SYMBOL(udp_getsockopt);
 
 #ifdef CONFIG_COMPAT
 int compat_udp_getsockopt(struct sock *sk, int level, int optname,
@@ -2203,6 +2213,7 @@ int compat_udp_getsockopt(struct sock *sk, int level, int optname,
 		return udp_lib_getsockopt(sk, level, optname, optval, optlen);
 	return compat_ip_getsockopt(sk, level, optname, optval, optlen);
 }
+EXPORT_SYMBOL(compat_udp_getsockopt);
 #endif
 /**
  * 	udp_poll - wait for a UDP event.
