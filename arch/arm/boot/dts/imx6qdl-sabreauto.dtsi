@@ -185,7 +185,6 @@
 &i2c3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c3>;
-	pinctrl-assert-gpios = <&gpio5 4 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 
 	max7310_a: gpio@30 {
@@ -468,8 +467,8 @@
 	pinctrl-0 = <&pinctrl_usdhc3>;
 	pinctrl-1 = <&pinctrl_usdhc3_100mhz>;
 	pinctrl-2 = <&pinctrl_usdhc3_200mhz>;
-	cd-gpios = <&gpio6 15 0>;
-	wp-gpios = <&gpio1 13 0>;
+	cd-gpios = <&gpio6 15 GPIO_ACTIVE_LOW>;
+	wp-gpios = <&gpio1 13 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 };
 

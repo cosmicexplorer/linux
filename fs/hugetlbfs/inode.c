@@ -130,7 +130,6 @@ static int hugetlbfs_file_mmap(struct file *file, struct vm_area_struct *vma)
 		goto out;
 
 	ret = 0;
-	hugetlb_prefault_arch_hook(vma->vm_mm);
 	if (vma->vm_flags & VM_WRITE && inode->i_size < len)
 		inode->i_size = len;
 out:
@@ -393,7 +392,7 @@ static int hugetlb_vmtruncate(struct inode *inode, loff_t offset)
 
 static int hugetlbfs_setattr(struct dentry *dentry, struct iattr *attr)
 {
-	struct inode *inode = dentry->d_inode;
+	struct inode *inode = d_inode(dentry);
 	struct hstate *h = hstate_inode(inode);
 	int error;
 	unsigned int ia_valid = attr->ia_valid;
@@ -587,7 +586,7 @@ static int hugetlbfs_migrate_page(struct address_space *mapping,
 static int hugetlbfs_statfs(struct dentry *dentry, struct kstatfs *buf)
 {
 	struct hugetlbfs_sb_info *sbinfo = HUGETLBFS_SB(dentry->d_sb);
-	struct hstate *h = hstate_inode(dentry->d_inode);
+	struct hstate *h = hstate_inode(d_inode(dentry));
 
 	buf->f_type = HUGETLBFS_MAGIC;
 	buf->f_bsize = huge_page_size(h);
